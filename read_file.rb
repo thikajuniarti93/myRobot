@@ -1,4 +1,4 @@
-def readFile(path)
+def read_file(path)
     begin 
         # read file from path (argumen from index) 
         file_data = File.readlines(path)

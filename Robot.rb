@@ -2,31 +2,31 @@ class Robot
     attr_accessor :name, :coordinateX, :coordinateY, :direction
 
     def initialize(name, coordinateX, coordinateY, direction)
-        if name.class != String || 
-            coordinateX.class != Integer || 
-            coordinateY.class != Integer || 
-            direction.class != String
+        if !(name.instance_of?(String)) || 
+            !(coordinateX.instance_of?(Integer)) || 
+            !(coordinateY.instance_of?(Integer)) || 
+            !(direction.instance_of?(String))
                 raise "Invalid parameter"
-        elsif !["NORTH", "SOUTH", "WEST", "EAST"].include?(direction)
-            raise "Parameter direction should be NORTH, SOUTH, WEST, EAST"
+        elsif !["NORTH", "SOUTH", "WEST", "EAST"].include?(direction.upcase)
+            raise "Parameter command should be NORTH, SOUTH, WEST, EAST"
         end
 
         @name = name
-        @coordinateX = coordinateX.to_i
-        @coordinateY = coordinateY.to_i
-        @direction = direction
+        @coordinateX = coordinateX
+        @coordinateY = coordinateY
+        @direction = direction.upcase
     end
 
-    def move 
+    def move        
         case @direction
             when "NORTH"
-                @coordinateY += 1
+                @coordinateY += @coordinateY > 5 ? 0 : 1
             when "SOUTH"
-                @coordinateY -= 1
+                @coordinateY -= @coordinateY == 0 ? 0 : 1
             when "EAST"
-                @coordinateX += 1
+                @coordinateX += @coordinateX > 5 ? 0 : 1
             when "WEST"
-                @coordinateX -= 1
+                @coordinateX -= @coordinateX == 0 ? 0 : 1
         end
     end
 
